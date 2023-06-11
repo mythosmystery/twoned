@@ -2,9 +2,10 @@
 module.exports = {
   arrowParens: "always",
   printWidth: 80,
-  singleQuote: false,
+  singleQuote: true,
+  bracketSpacing: true,
   jsxSingleQuote: false,
-  semi: true,
+  semi: false,
   trailingComma: "all",
   tabWidth: 2,
   plugins: [require.resolve("prettier-plugin-tailwindcss")],
