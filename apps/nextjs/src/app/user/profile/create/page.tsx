@@ -7,7 +7,7 @@ const ProfileCreatePage = async () => {
   const { userId } = auth()
   const token = await getSpotifyToken(userId!)
 
-  const res = await fetch('https://api.spotify.com/v1/me/tracks', {
+  const res = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=5', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -15,13 +15,19 @@ const ProfileCreatePage = async () => {
       revalidate: 10,
     },
   })
-  const { items } = (await res.json()) as { items: any[] }
+  const { items } = (await res.json()) as SpotifyApi.UsersTopTracksResponse
 
-  const albumImages = items.map((item: any) => item.track.album.images[1].url)
+  const trackItems = items.map((item) => ({
+    artUrl: item.album.images[0]?.url || '',
+    name: item.name,
+    artist: item.artists[0]?.name || '',
+    album: item.album.name,
+    id: item.id,
+  }))
 
   return (
     <HorizontalCenterLayout>
-      <CreateProfileForm albumImages={albumImages} />
+      <CreateProfileForm tracks={trackItems} />
     </HorizontalCenterLayout>
   )
 }

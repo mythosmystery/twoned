@@ -1,49 +1,49 @@
-import React from "react";
+import React from 'react'
 
-import { Button, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { useAuth } from "@clerk/clerk-expo";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { FlashList } from "@shopify/flash-list";
-import type { inferProcedureOutput } from "@trpc/server";
-import type { AppRouter } from "@acme/api";
+import { Button, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { useAuth } from '@clerk/clerk-expo'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { FlashList } from '@shopify/flash-list'
+import type { inferProcedureOutput } from '@trpc/server'
+import type { AppRouter } from '@tnd/api'
 
-import { trpc } from "../utils/trpc";
+import { trpc } from '../utils/trpc'
 
 const SignOut = () => {
-  const { signOut } = useAuth();
+  const { signOut } = useAuth()
   return (
     <View className="rounded-lg border-2 border-gray-500 p-4">
       <Button
         title="Sign Out"
         onPress={() => {
-          signOut();
+          signOut()
         }}
       />
     </View>
-  );
-};
+  )
+}
 
 const PostCard: React.FC<{
-  post: inferProcedureOutput<AppRouter["post"]["all"]>[number];
+  post: inferProcedureOutput<AppRouter['post']['all']>[number]
 }> = ({ post }) => {
   return (
     <View className="rounded-lg border-2 border-gray-500 p-4">
       <Text className="text-xl font-semibold text-[#cc66ff]">{post.title}</Text>
       <Text className="text-white">{post.content}</Text>
     </View>
-  );
-};
+  )
+}
 
 const CreatePost: React.FC = () => {
-  const utils = trpc.useContext();
+  const utils = trpc.useContext()
   const { mutate } = trpc.post.create.useMutation({
     async onSuccess() {
-      await utils.post.all.invalidate();
+      await utils.post.all.invalidate()
     },
-  });
+  })
 
-  const [title, onChangeTitle] = React.useState("");
-  const [content, onChangeContent] = React.useState("");
+  const [title, onChangeTitle] = React.useState('')
+  const [content, onChangeContent] = React.useState('')
 
   return (
     <View className="flex flex-col border-t-2 border-gray-500 p-4">
@@ -63,18 +63,18 @@ const CreatePost: React.FC = () => {
           mutate({
             title,
             content,
-          });
+          })
         }}
       >
         <Text className="font-semibold text-white">Publish post</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
 
 export const HomeScreen = () => {
-  const postQuery = trpc.post.all.useQuery();
-  const [showPost, setShowPost] = React.useState<string | null>(null);
+  const postQuery = trpc.post.all.useQuery()
+  const [showPost, setShowPost] = React.useState<string | null>(null)
 
   return (
     <SafeAreaView className="bg-[#2e026d] bg-gradient-to-b from-[#2e026d] to-[#15162c]">
@@ -111,5 +111,5 @@ export const HomeScreen = () => {
         <SignOut />
       </View>
     </SafeAreaView>
-  );
-};
+  )
+}
