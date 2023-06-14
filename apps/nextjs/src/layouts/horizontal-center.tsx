@@ -1,9 +1,9 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react'
 
 export const HorizontalCenterLayout = ({
   children,
 }: {
-  children: ReactNode;
+  children: ReactNode
 }) => {
-  return <div className="flex flex-col items-center py-20">{children}</div>;
-};
+  return <div className="flex flex-col items-center py-20">{children}</div>
+}

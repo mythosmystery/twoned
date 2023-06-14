@@ -1,11 +1,11 @@
-"use client";
+'use client'
 
-import Image from "next/image";
+import Image from 'next/image'
 
 export const CreateProfileForm = ({
   albumImages,
 }: {
-  albumImages: string[];
+  albumImages: string[]
 }) => {
   return (
     <div>
@@ -22,5 +22,5 @@ export const CreateProfileForm = ({
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

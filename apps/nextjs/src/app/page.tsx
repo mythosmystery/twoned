@@ -1,5 +1,5 @@
-import Link from "next/link";
-import { HorizontalCenterLayout } from "../layouts/horizontal-center";
+import Link from 'next/link'
+import { HorizontalCenterLayout } from '../layouts/horizontal-center'
 
 const HomePage = () => {
   return (
@@ -18,7 +18,7 @@ const HomePage = () => {
         get started!
       </Link>
     </HorizontalCenterLayout>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage

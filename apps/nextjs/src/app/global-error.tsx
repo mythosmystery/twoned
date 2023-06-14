@@ -1,16 +1,16 @@
-"use client";
+'use client'
 
-import type { NextPage } from "next";
-import { HorizontalCenterLayout } from "@/layouts/horizontal-center";
-import { BsFillCloudDrizzleFill } from "react-icons/bs";
-import { useEffect } from "react";
+import type { NextPage } from 'next'
+import { HorizontalCenterLayout } from '@/layouts/horizontal-center'
+import { BsFillCloudDrizzleFill } from 'react-icons/bs'
+import { useEffect } from 'react'
 
 const ErrorPage: NextPage<{ error: Error; reset: () => void }> = ({
   error,
 }) => {
   useEffect(() => {
-    console.error(error);
-  }, [error]);
+    console.error(error)
+  }, [error])
 
   return (
     <html>
@@ -22,7 +22,7 @@ const ErrorPage: NextPage<{ error: Error; reset: () => void }> = ({
         </HorizontalCenterLayout>
       </body>
     </html>
-  );
-};
+  )
+}
 
-export default ErrorPage;
+export default ErrorPage

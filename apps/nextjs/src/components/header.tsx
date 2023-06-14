@@ -1,5 +1,5 @@
-import { UserButton, auth } from "@clerk/nextjs"
-import Link from "next/link"
+import { UserButton, auth } from '@clerk/nextjs'
+import Link from 'next/link'
 
 export const Header = () => {
   const { userId } = auth()

@@ -5,5 +5,5 @@ export const CenterLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
       </main>
     </div>
-  );
-};
+  )
+}
