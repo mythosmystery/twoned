@@ -1,10 +1,10 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { profileCreateAtom, ProfileCreateState } from '@/state'
+import { profileCreateAtom } from '@/state'
 import { SelectAlbumCard } from '../cards/select-album'
-import { useEffect } from 'react'
-import { trpc } from '../../utils/trpc'
+import { useEffect, useState } from 'react'
+import { Loader } from '../loader'
 
 type Props = {
   tracks: {
@@ -14,18 +14,15 @@ type Props = {
     album: string
     id: string
   }[]
-  dehydratedState: ProfileCreateState | null
 }
 
-export const CreateProfileForm = ({ tracks, dehydratedState }: Props) => {
+export const CreateProfileForm = ({ tracks }: Props) => {
   const [profileCreate, setProfile] = useAtom(profileCreateAtom)
-  const { mutate } = trpc.user.saveProfileState.useMutation()
+  const [loading, setLoading] = useState(true)
 
-  if (typeof window !== 'undefined') {
-    window.onbeforeunload = () => {
-      if (profileCreate) mutate(profileCreate)
-    }
-  }
+  useEffect(() => {
+    if (profileCreate) setLoading(false)
+  }, [profileCreate])
 
   const handleClick = (id: string) => {
     setProfile((p) => {
@@ -36,37 +33,34 @@ export const CreateProfileForm = ({ tracks, dehydratedState }: Props) => {
     })
   }
 
-  if (!tracks) return null
+  if (!tracks) throw new Error('No tracks found')
+  if (loading) return <Loader />
   return (
     <div className="flex flex-col items-center">
       <h1 className="text-3xl font-thin">Create your profile</h1>
-      <div className="my-10 flex w-1/2 flex-col items-center gap-4">
+      <div className="my-10 flex w-full flex-col items-center gap-4 sm:w-3/4 md:w-2/3 lg:w-1/2">
         <input
           type="text"
           placeholder="Name"
           name="name"
-          value={profileCreate?.name || dehydratedState?.name || ''}
+          value={profileCreate?.name || ''}
           onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))}
           className="w-full appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
         />
         <textarea
           className="w-full resize-none appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
           placeholder="Bio"
-          value={profileCreate?.bio || dehydratedState?.bio || ''}
+          value={profileCreate?.bio || ''}
           onChange={(e) => setProfile((p) => ({ ...p, bio: e.target.value }))}
           name="bio"
         />
       </div>
       <h4 className="mb-4 text-xl font-thin">Select your favorite tracks</h4>
-      <div className="flex gap-6">
+      <div className="grid gap-6 p-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
         {tracks.map((item) => (
           <SelectAlbumCard
             key={item.id}
-            selected={
-              !!(profileCreate
-                ? profileCreate?.songs?.find((s) => s === item.id)
-                : dehydratedState?.songs?.find((s) => s === item.id))
-            }
+            selected={!!profileCreate?.songs?.find((s) => s === item.id)}
             onClick={(id) => handleClick(id)}
             {...item}
           />

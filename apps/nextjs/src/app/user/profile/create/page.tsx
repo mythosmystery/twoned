@@ -2,21 +2,17 @@ import { CreateProfileForm } from '@/components/forms/create-profile'
 import { HorizontalCenterLayout } from '@/layouts/horizontal-center'
 import { auth } from '@clerk/nextjs'
 import { getSpotifyToken } from '@/utils/auth'
-import { getValue } from '@/utils/redis-cache'
-import { ProfileCreateState } from '@/state'
 
 const ProfileCreatePage = async () => {
   const { userId } = auth()
   const token = await getSpotifyToken(userId!)
-
-  const dehydratedState = await getValue<ProfileCreateState>(userId!)
 
   const res = await fetch('https://api.spotify.com/v1/me/top/tracks?limit=5', {
     headers: {
       Authorization: `Bearer ${token}`,
     },
     next: {
-      revalidate: 10,
+      revalidate: 60,
     },
   })
   const { items } = (await res.json()) as SpotifyApi.UsersTopTracksResponse
@@ -31,10 +27,7 @@ const ProfileCreatePage = async () => {
 
   return (
     <HorizontalCenterLayout>
-      <CreateProfileForm
-        tracks={trackItems}
-        dehydratedState={dehydratedState}
-      />
+      <CreateProfileForm tracks={trackItems} />
     </HorizontalCenterLayout>
   )
 }

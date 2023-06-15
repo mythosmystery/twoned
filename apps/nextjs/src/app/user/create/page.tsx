@@ -1,13 +1,12 @@
 import { CenterLayout } from '@/layouts/center'
 import Link from 'next/link'
-import { RingLoader } from 'react-spinners'
 import { CreateUser } from '@/components/headless/create-user'
+import { Loader } from '@/components/loader'
 
 const CreateUserPage = () => {
   return (
     <CenterLayout>
-      <h1 className="text-4xl font-thin">Creating your account...</h1>
-      <RingLoader size={150} className="my-32" />
+      <Loader text="Creating your account..." />
       <span>
         You should be automatically redirected, if not{' '}
         <Link className="text-purple-700 hover:text-blue-600" href="/">
