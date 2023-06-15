@@ -1,5 +1,5 @@
 {
-  "name": "@acme/api",
+  "name": "@tnd/api",
   "version": "0.1.0",
   "main": "./index.ts",
   "types": "./index.ts",
@@ -10,9 +10,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@acme/db": "*",
+    "@tnd/db": "*",
     "@trpc/client": "^10.1.0",
     "@trpc/server": "^10.1.0",
+    "@upstash/redis": "^1.21.0",
     "superjson": "^1.9.1",
     "zod": "^3.18.0"
   },

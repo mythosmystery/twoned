@@ -26,4 +26,18 @@ export const userRouter = router({
         data: { profile: { create: { bio: input.bio, name: input.name } } },
       })
     }),
+
+  saveProfileState: protectedProcedure
+    .input(
+      z.object({
+        name: z.string().optional(),
+        bio: z.string().optional(),
+        songs: z.array(z.string().optional()).optional(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.auth.userId
+      await ctx.redis.set(userId, input)
+      return input
+    }),
 })

@@ -1,8 +1,10 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { profileCreateAtom } from '../../state'
+import { profileCreateAtom, ProfileCreateState } from '@/state'
 import { SelectAlbumCard } from '../cards/select-album'
+import { useEffect } from 'react'
+import { trpc } from '../../utils/trpc'
 
 type Props = {
   tracks: {
@@ -12,10 +14,18 @@ type Props = {
     album: string
     id: string
   }[]
+  dehydratedState: ProfileCreateState | null
 }
 
-export const CreateProfileForm = ({ tracks }: Props) => {
+export const CreateProfileForm = ({ tracks, dehydratedState }: Props) => {
   const [profileCreate, setProfile] = useAtom(profileCreateAtom)
+  const { mutate } = trpc.user.saveProfileState.useMutation()
+
+  if (typeof window !== 'undefined') {
+    window.onbeforeunload = () => {
+      if (profileCreate) mutate(profileCreate)
+    }
+  }
 
   const handleClick = (id: string) => {
     setProfile((p) => {
@@ -35,14 +45,14 @@ export const CreateProfileForm = ({ tracks }: Props) => {
           type="text"
           placeholder="Name"
           name="name"
-          value={profileCreate?.name}
+          value={profileCreate?.name || dehydratedState?.name || ''}
           onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))}
           className="w-full appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
         />
         <textarea
           className="w-full resize-none appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
           placeholder="Bio"
-          value={profileCreate?.bio}
+          value={profileCreate?.bio || dehydratedState?.bio || ''}
           onChange={(e) => setProfile((p) => ({ ...p, bio: e.target.value }))}
           name="bio"
         />
@@ -52,7 +62,11 @@ export const CreateProfileForm = ({ tracks }: Props) => {
         {tracks.map((item) => (
           <SelectAlbumCard
             key={item.id}
-            selected={!!profileCreate?.songs?.find((s) => s === item.id)}
+            selected={
+              !!(profileCreate
+                ? profileCreate?.songs?.find((s) => s === item.id)
+                : dehydratedState?.songs?.find((s) => s === item.id))
+            }
             onClick={(id) => handleClick(id)}
             {...item}
           />

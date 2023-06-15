@@ -9,9 +9,10 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ['@acme/api', '@acme/db'],
+  transpilePackages: ['@tnd/api', '@tnd/db'],
   experimental: {
     appDir: true,
+    serverActions: true,
   },
   // We already do linting on GH actions
   eslint: {
