@@ -25,7 +25,7 @@ export const SelectAlbumCard = ({
       className={
         'flex cursor-pointer flex-col items-center p-2 ' +
         (selected
-          ? 'rounded-md border-2 border-green-500'
+          ? 'rounded-md border-2 border-blue-500'
           : 'border-2 border-transparent')
       }
     >

@@ -1,7 +1,6 @@
 'use client'
 
 import { useAtom } from 'jotai'
-import { useState } from 'react'
 import { profileCreateAtom } from '../../state'
 import { SelectAlbumCard } from '../cards/select-album'
 
@@ -36,11 +35,15 @@ export const CreateProfileForm = ({ tracks }: Props) => {
           type="text"
           placeholder="Name"
           name="name"
-          className="focus:shadow-outline w-full appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
+          value={profileCreate?.name}
+          onChange={(e) => setProfile((p) => ({ ...p, name: e.target.value }))}
+          className="w-full appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
         />
         <textarea
-          className="focus:shadow-outline w-full resize-none appearance-none rounded border py-2 px-3 leading-tight text-gray-700 shadow focus:outline-none"
+          className="w-full resize-none appearance-none border-b border-blue-500 py-2 px-3 leading-tight text-gray-700 focus:outline-none"
           placeholder="Bio"
+          value={profileCreate?.bio}
+          onChange={(e) => setProfile((p) => ({ ...p, bio: e.target.value }))}
           name="bio"
         />
       </div>

@@ -1,5 +1,5 @@
 {
-  "name": "@tnd/nextjs",
+  "name": "@acme/nextjs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,9 +14,9 @@
   "dependencies": {
     "@clerk/nextjs": "^4.19.0",
     "@tanstack/react-query": "^4.16.1",
-    "@tnd/api": "*",
-    "@tnd/db": "*",
-    "@tnd/tailwind-config": "*",
+    "@acme/api": "*",
+    "@acme/db": "*",
+    "@acme/tailwind-config": "*",
     "@trpc/client": "^10.1.0",
     "@trpc/next": "^10.1.0",
     "@trpc/react-query": "^10.1.0",

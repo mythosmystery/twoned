@@ -9,7 +9,7 @@
 const config = {
   reactStrictMode: true,
   swcMinify: true,
-  transpilePackages: ['@tnd/api', '@tnd/db'],
+  transpilePackages: ['@acme/api', '@acme/db'],
   experimental: {
     appDir: true,
   },

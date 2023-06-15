@@ -1,30 +1,9 @@
-'use client'
-
-import { useAuth } from '@clerk/nextjs'
-import { CenterLayout } from '../../../layouts/center'
-import { useRouter } from 'next/navigation'
+import { CenterLayout } from '@/layouts/center'
 import Link from 'next/link'
 import { RingLoader } from 'react-spinners'
-import { trpc } from '@/utils/trpc'
-import { useEffect } from 'react'
+import { CreateUser } from '@/components/headless/create-user'
 
 const CreateUserPage = () => {
-  const { userId } = useAuth()
-  const router = useRouter()
-  const { mutate, isSuccess } = trpc.user.create.useMutation()
-
-  useEffect(() => {
-    if (userId) {
-      mutate()
-    }
-  }, [userId, mutate])
-
-  useEffect(() => {
-    if (isSuccess) {
-      router.push('/')
-    }
-  }, [isSuccess, router])
-
   return (
     <CenterLayout>
       <h1 className="text-4xl font-thin">Creating your account...</h1>
@@ -35,6 +14,7 @@ const CreateUserPage = () => {
           Click here
         </Link>
       </span>
+      <CreateUser />
     </CenterLayout>
   )
 }
