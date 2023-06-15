@@ -1,38 +1,45 @@
 'use client'
 
+import { useAtom } from 'jotai'
 import Image from 'next/image'
+import { profileCreateAtom } from '@/state'
+import { RouterInputs } from '@/utils/trpc'
 
-type Props = {
-  artUrl: string
-  album: string
-  artist: string
-  name: string
-  id: string
-  onClick: (type: string) => void
-  selected?: boolean
-}
+type Props = RouterInputs['user']['profileCreate']['songs'][0]
 
 export const SelectAlbumCard = ({
   artUrl,
   album,
   artist,
-  name,
+  title,
   id,
-  onClick,
-  selected = false,
 }: Props) => {
+  const [profileCreate, setProfile] = useAtom(profileCreateAtom)
+
+  const handleClick = () => {
+    const song = { artUrl, album, artist, title, id }
+    if (!song) return
+
+    setProfile((p) => {
+      if (!p?.songs) return { ...p, songs: [song] }
+      if (p.songs.find((i) => i.id === id))
+        return { ...p, songs: p.songs.filter((i) => i.id !== id) }
+      return { ...p, songs: [...p.songs, song] }
+    })
+  }
+
   return (
     <div
-      onClick={() => onClick(id)}
+      onClick={handleClick}
       className={
         'flex cursor-pointer flex-col items-center p-2 ' +
-        (selected
-          ? 'rounded-md border-2 border-blue-500'
+        (!!profileCreate?.songs?.find((s) => s.id === id)
+          ? 'rounded-md border-2 border-blue-700'
           : 'border-2 border-transparent')
       }
     >
       <Image src={artUrl} width={200} height={200} alt="Album image" />
-      <p className="text-lg">{name}</p>
+      <p className="text-lg">{title}</p>
       <p className="text-sm">{artist}</p>
     </div>
   )

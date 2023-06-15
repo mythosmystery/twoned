@@ -20,15 +20,40 @@ model User {
 }
 
 model Profile {
-    id        String   @id @default(cuid())
-    name      String
-    bio       String
-    user      User     @relation(fields: [userId], references: [id])
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    userId    String   @unique
+    id            String   @id @default(cuid())
+    name          String
+    bio           String
+    topics        Topic[]
+    user          User     @relation(fields: [userId], references: [id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    userId        String   @unique
+    favoriteSongs Song[]
 
     @@index([userId], name: "userId")
+}
+
+model Topic {
+    id        String    @id @default(cuid())
+    name      String
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    profiles  Profile[]
+}
+
+model Song {
+    id        String   @id @default(cuid())
+    spotifyId String
+    title     String
+    artist    String
+    album     String
+    artUrl    String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    Profile   Profile? @relation(fields: [profileId], references: [id])
+    profileId String?
+
+    @@index([profileId], name: "profileId")
 }
 
 model Post {

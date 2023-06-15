@@ -1,5 +1,5 @@
-import { Loader } from '../../components/loader'
-import { HorizontalCenterLayout } from '../../layouts/horizontal-center'
+import { Loader } from '@/components/loader'
+import { HorizontalCenterLayout } from '@/layouts/horizontal-center'
 
 const Loading = () => {
   return (

@@ -3,6 +3,7 @@ import { Raleway } from 'next/font/google'
 import { Header } from '@/components/header'
 import '../styles/globals.css'
 import { TrpcProvider } from '@/utils/trpc-client'
+import { Background } from '../components/background'
 
 const font = Raleway({
   subsets: ['latin'],
@@ -25,6 +26,7 @@ export default function RootLayout({
           <TrpcProvider>
             <Header />
             {children}
+            <Background />
           </TrpcProvider>
         </body>
       </html>

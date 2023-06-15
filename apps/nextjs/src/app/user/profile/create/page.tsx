@@ -19,7 +19,7 @@ const ProfileCreatePage = async () => {
 
   const trackItems = items.map((item) => ({
     artUrl: item.album.images[0]?.url || '',
-    name: item.name,
+    title: item.name,
     artist: item.artists[0]?.name || '',
     album: item.album.name,
     id: item.id,
