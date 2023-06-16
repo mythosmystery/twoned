@@ -13,13 +13,13 @@
   },
   "dependencies": {
     "@planetscale/database": "^1.7.0",
-    "@prisma/client": "^4.7.1",
+    "@prisma/client": "^4.14.0",
     "drizzle-orm": "^0.26.5"
   },
   "devDependencies": {
     "dotenv-cli": "^6.0.0",
     "drizzle-kit": "^0.18.1",
-    "prisma": "^4.7.1",
+    "prisma": "^4.14.0",
     "typescript": "^4.9.3"
   }
 }
