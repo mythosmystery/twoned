@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { profileCreateAtom } from '@/state'
 import { RouterInputs } from '@/utils/trpc'
 
-type Props = RouterInputs['user']['profileCreate']['songs'][0]
+type Props = RouterInputs['user']['profileCreate']['favoriteSongs'][0]
 
 export const SelectAlbumCard = ({
   artUrl,
@@ -21,10 +21,13 @@ export const SelectAlbumCard = ({
     if (!song) return
 
     setProfile((p) => {
-      if (!p?.songs) return { ...p, songs: [song] }
-      if (p.songs.find((i) => i.id === id))
-        return { ...p, songs: p.songs.filter((i) => i.id !== id) }
-      return { ...p, songs: [...p.songs, song] }
+      if (!p?.favoriteSongs) return { ...p, favoriteSongs: [song] }
+      if (p.favoriteSongs.find((i) => i.id === id))
+        return {
+          ...p,
+          favoriteSongs: p.favoriteSongs.filter((i) => i.id !== id),
+        }
+      return { ...p, favoriteSongs: [...p.favoriteSongs, song] }
     })
   }
 
@@ -33,7 +36,7 @@ export const SelectAlbumCard = ({
       onClick={handleClick}
       className={
         'flex cursor-pointer flex-col items-center p-2 ' +
-        (!!profileCreate?.songs?.find((s) => s.id === id)
+        (!!profileCreate?.favoriteSongs?.find((s) => s.id === id)
           ? 'rounded-md border-2 border-blue-700'
           : 'border-2 border-transparent')
       }

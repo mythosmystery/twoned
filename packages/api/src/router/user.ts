@@ -15,7 +15,7 @@ export const userRouter = router({
         name: z.string(),
         bio: z.string(),
         age: z.number().min(18, 'You must be 18 or older to use this app'),
-        songs: z.array(
+        favoriteSongs: z.array(
           z.object({
             title: z.string(),
             artist: z.string(),

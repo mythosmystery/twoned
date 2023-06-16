@@ -9,7 +9,7 @@ import { RouterInputs } from '../../utils/trpc'
 import { Stepper } from '../stepper'
 
 type Props = {
-  tracks: RouterInputs['user']['profileCreate']['songs']
+  tracks: RouterInputs['user']['profileCreate']['favoriteSongs']
 }
 
 export const CreateProfileForm = ({ tracks }: Props) => {

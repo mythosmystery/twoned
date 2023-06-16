@@ -2,7 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["jsonProtocol"]
 }
 
 datasource db {
@@ -42,18 +43,15 @@ model Topic {
 }
 
 model Song {
-    id        String   @id @default(cuid())
+    id        String    @id @default(cuid())
     spotifyId String
     title     String
     artist    String
     album     String
     artUrl    String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
-    Profile   Profile? @relation(fields: [profileId], references: [id])
-    profileId String?
-
-    @@index([profileId], name: "profileId")
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+    Profiles  Profile[]
 }
 
 model Post {
