@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^4.19.0",
+    "@radix-ui/react-radio-group": "^1.1.3",
     "@tanstack/react-query": "^4.16.1",
     "@tnd/api": "*",
     "@tnd/db": "*",
@@ -20,14 +21,17 @@
     "@trpc/next": "^10.1.0",
     "@trpc/react-query": "^10.1.0",
     "@trpc/server": "^10.1.0",
+    "@uploadthing/react": "^4.1.3",
     "@upstash/redis": "^1.21.0",
     "jotai": "^2.2.0",
     "next": "^13.4.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-dropzone": "^14.2.3",
     "react-icons": "^4.9.0",
     "react-spinners": "^0.13.8",
     "spotify-web-api-node": "^5.0.2",
+    "uploadthing": "^4.1.3",
     "zod": "^3.18.0"
   },
   "devDependencies": {

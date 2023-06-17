@@ -6,12 +6,12 @@ export const Header = () => {
   const isSignedIn = !!userId
   return (
     <header className="flex items-center justify-between p-6">
-      <Link href="/" className="text-xl text-purple-500 hover:text-blue-700">
+      <Link href="/" className="text-xl text-white hover:text-blue-300">
         twoned
       </Link>
       <UserButton afterSignOutUrl="/" />
       {!isSignedIn && (
-        <Link href="/sign-in" className="text-blue-500 hover:text-blue-900">
+        <Link href="/sign-in" className="text-white hover:text-blue-300">
           Sign In
         </Link>
       )}

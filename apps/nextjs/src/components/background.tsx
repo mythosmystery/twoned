@@ -1,5 +1,5 @@
 export const Background = () => {
   return (
-    <div className="fixed inset-0 -z-10 bg-gradient-to-r from-blue-400 to-purple-500" />
+    <div className="fixed inset-0 -z-50 bg-gradient-to-r from-blue-800 to-purple-700" />
   )
 }

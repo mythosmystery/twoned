@@ -1,1 +1,1 @@
-export { prisma } from '@tnd/db'
+export * from '@tnd/db'

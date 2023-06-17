@@ -35,10 +35,10 @@ export const SelectAlbumCard = ({
     <div
       onClick={handleClick}
       className={
-        'flex cursor-pointer flex-col items-center p-2 ' +
+        'flex cursor-pointer flex-col items-center p-4 ' +
         (!!profileCreate?.favoriteSongs?.find((s) => s.id === id)
-          ? 'rounded-md border-2 border-blue-700'
-          : 'border-2 border-transparent')
+          ? 'rounded-xl bg-blue-300/30'
+          : '')
       }
     >
       <Image src={artUrl} width={200} height={200} alt="Album image" />

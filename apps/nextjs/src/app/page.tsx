@@ -12,7 +12,7 @@ const HomePage = () => {
         meet people who share your music taste
       </h4>
       <Link
-        className="my-12 text-2xl text-purple-200 hover:text-blue-600"
+        className="my-12 text-2xl text-yellow-200 hover:text-blue-300"
         href="/feed"
       >
         get started!

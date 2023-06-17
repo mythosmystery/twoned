@@ -24,6 +24,7 @@ const config = {
       'pbs.twimg.com',
       'abs.twimg.com',
       'avatars.githubusercontent.com',
+      'uploadthing.com',
     ],
   },
 }

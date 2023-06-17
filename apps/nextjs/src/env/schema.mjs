@@ -11,6 +11,8 @@ export const serverSchema = z.object({
   REDIS_URL: z.string().url(),
   DATABASE_URL: z.string().url(),
   REDIS_TOKEN: z.string(),
+  UPLOADTHING_SECRET: z.string(),
+  UPLOADTHING_APP_ID: z.string(),
 })
 
 /**

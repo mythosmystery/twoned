@@ -21,17 +21,29 @@ model User {
 }
 
 model Profile {
-    id            String   @id @default(cuid())
+    id            String         @id @default(cuid())
     name          String
     bio           String
+    age           Int
     topics        Topic[]
-    user          User     @relation(fields: [userId], references: [id])
-    createdAt     DateTime @default(now())
-    updatedAt     DateTime @updatedAt
-    userId        String   @unique
+    location      String
+    user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+    createdAt     DateTime       @default(now())
+    updatedAt     DateTime       @updatedAt
+    userId        String         @unique
     favoriteSongs Song[]
+    images        ProfileImage[]
 
     @@index([userId], name: "userId")
+}
+
+model ProfileImage {
+    id        String   @id @default(cuid())
+    url       String
+    profile   Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    profileId String   @unique
 }
 
 model Topic {
@@ -44,7 +56,7 @@ model Topic {
 
 model Song {
     id        String    @id @default(cuid())
-    spotifyId String
+    spotifyId String    @unique
     title     String
     artist    String
     album     String
