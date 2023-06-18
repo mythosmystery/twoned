@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { profileCreateAtom } from '@/state'
 import { RouterInputs } from '@/utils/trpc'
 
-type Props = RouterInputs['user']['profileCreate']['favoriteSongs'][0]
+type Props = RouterInputs['profile']['create']['favoriteSongs'][0]
 
 export const SelectAlbumCard = ({
   artUrl,
