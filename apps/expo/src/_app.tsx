@@ -9,6 +9,9 @@ import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo'
 import { tokenCache } from './utils/cache'
 import Constants from 'expo-constants'
 import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
+
+const Stack = createNativeStackNavigator()
 
 export const App = () => {
   return (
@@ -18,12 +21,14 @@ export const App = () => {
     >
       <NavigationContainer>
         <SignedIn>
-          <TRPCProvider>
-            <SafeAreaProvider>
-              <HomeScreen />
-              <StatusBar />
-            </SafeAreaProvider>
-          </TRPCProvider>
+          <Stack.Navigator>
+            <TRPCProvider>
+              <SafeAreaProvider>
+                <Stack.Screen name="Home" component={HomeScreen} />
+                <StatusBar />
+              </SafeAreaProvider>
+            </TRPCProvider>
+          </Stack.Navigator>
         </SignedIn>
         <SignedOut>
           <SignInSignUpScreen />
